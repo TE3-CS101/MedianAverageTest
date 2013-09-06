@@ -23,7 +23,7 @@ public class MedianAverageTest
         double median = nums.get(mid);
         
         if (len % 2 == 0)
-            median = (median + nums.get(mid + 1)) / 2;
+            median = (median + nums.get(mid - 1)) / 2;
         
         return median;
     }
@@ -32,44 +32,26 @@ public class MedianAverageTest
     {
         Scanner reader = new Scanner(System.in);
         
-        System.out.print("Average: ");
-        String averageInput = reader.nextLine();
+        System.out.print("Input numbers: ");
+        String input = reader.nextLine();
         
-        System.out.print("Median: ");
-        String medianInput = reader.nextLine();
+        String[] split = input.split(" ");
+        ArrayList<Double> parsed = new ArrayList<Double>();
         
-        String[] splitAverage = averageInput.split(" ");
-        ArrayList<Double> averageNums = new ArrayList<Double>();
-        
-        for (int i = 0; i < splitAverage.length; i++)
+        for (int i = 0; i < split.length; i++)
         {
             try
             {
-                Double num = Double.valueOf(splitAverage[i]);
-                averageNums.add(num);
+                Double num = Double.valueOf(split[i]);
+                parsed.add(num);
             }
             catch (NumberFormatException ex)
             {
             }
         }
         
-        String[] splitMedian = medianInput.split(" ");
-        ArrayList<Double> medianNums = new ArrayList<Double>();
-        
-        for (int i = 0; i < splitMedian.length; i++)
-        {
-            try
-            {
-                Double num = Double.valueOf(splitMedian[i]);
-                medianNums.add(num);
-            }
-            catch (NumberFormatException ex)
-            {
-            }
-        }
-        
-        double average = average(averageNums);
-        double median = median(medianNums);
+        double average = average(parsed);
+        double median = median(parsed);
         
         System.out.println("Average is " + average + " and median is " + median);
     }
